@@ -1,0 +1,52 @@
+server:
+  port: 8085
+
+keycloak.admin:
+  server-url: http://localhost:8080
+  realm: master
+  username: admin
+  password: admin
+  client-id: admin-cli
+  grant-type: password
+
+provisioning:
+  target-realm: myrealm
+
+  clients:
+    - client-id: my-app
+      redirect-uris:
+        - http://localhost:3000/*
+      web-origins:
+        - "+"
+      service-accounts-enabled: true
+      public-client: false
+
+  realm-roles:
+    - name: app-user
+      description: "Application user"
+    - name: app-admin
+      description: "Application administrator"
+
+  client-scopes:
+    - name: custom-profile
+      description: "Custom profile data"
+    - name: custom-permissions
+      description: "Custom permissions and flags"
+
+  users:
+    - username: alice
+      password: password123
+      roles:
+        - app-user
+    - username: bob
+      password: password123
+      roles:
+        - app-user
+        - app-admin
+
+  client-scope-bindings:
+    - client-id: my-app
+      default-scopes:
+        - custom-profile
+      optional-scopes:
+        - custom-permissions
