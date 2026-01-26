@@ -50,3 +50,9 @@ provisioning:
         - custom-profile
       optional-scopes:
         - custom-permissions
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
